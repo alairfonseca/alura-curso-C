@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 int main() {
 
@@ -6,13 +8,18 @@ int main() {
   printf("* Bem vindo ao jogo! *\n");
   printf("**********************\n");
 
+  double pontos = 1000;
   int contador = 0;
   int ganhou = 0;
+  int chute;
+
+  int segundos = time(0);
+  srand(segundos);
+
+  int random = rand();
+  int numerosecreto = random % 100;
 
   while (!ganhou) {
-    int numerosecreto = 42;
-    int chute;
-
     printf("Tentativa : %d\n", contador + 1);
 
     printf("Qual e o seu chute ?\n");
@@ -41,8 +48,13 @@ int main() {
     }
 
     contador++;
+
+    double pontosperdidos = abs(chute - numerosecreto) / 2.0;
+    pontos -= pontosperdidos;
   }
 
   printf("\n    **Fim de jogo**");
+  printf("Você acertou em %d tentativas\n", contador);
+  printf("Total de pontos %.2f\n", pontos);
 
 }
